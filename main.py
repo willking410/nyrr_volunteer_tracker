@@ -10,49 +10,9 @@ Created on Tue May 16 11:48:18 2023
 import requests
 from bs4 import BeautifulSoup
 import time
+from nyrr_tracker_class import Race
 #from playsound import playsound
 
-class Race:
-    isMedical = ""
-    
-    def __init__(self, myDate, myTime, myLocation, myMeta, myTitle, myRaceName, myJobDesc):
-        self.date = myDate
-        self.time = myTime
-        self.location = myLocation
-        self.meta = myMeta
-        self.title = myTitle
-        self.raceName = myRaceName
-        self.jobDesc = myJobDesc
-        
-    def printDetails(self):
-        print("DATE: ",self.date)
-        print("TIME: ",self.time)
-        print("LOCATION: ",self.location)
-        print("META: ",self.meta)
-        print("TITLE: ",self.title)
-        print("RACENAME: ",self.raceName)
-        print("JOBDESC: ",self.jobDesc)
-        print("ISMEDICAL: ",self.isMedical)
-        print()
-        
-    def printTest(self):
-        print("DATE: ",self.date)
-        print("RACENAME: ",self.raceName)
-        print("TITLE: ",self.title)
-        print("ISMEDICAL: ",self.isMedical)
-        print()
-        
-    def checkMedical(self):
-        medTerms = ["Medical","medical","Practitioner","practitioner","Physician","physician"] #,"Physician","physician"
-        if any(word in self.title for word in medTerms) \
-            or any(word in self.jobDesc for word in medTerms):
-            self.isMedical = "Yes"
-        else:
-            self.isMedical = "No"
-            
-    def printNonMed(self):
-        if self.isMedical == "No":
-            self.printDetails()
 
 def webToSoup():
     url = 'https://www.nyrr.org/getinvolved/volunteer/opportunities?available_only=true&itemId=3EB6F0CC-0D76-4BAF-A894-E2AB244CEB44&limit=40&offset=40&opportunity_type=9%2B1%20Qualifier&totalItemLoaded=8'
@@ -136,8 +96,8 @@ def parseText(myText):
 
 temp = 1
 check = False
-mySleep = 55 #seconds
-maxRuns = 60
+mySleep = 5 #seconds
+maxRuns = 2
 
 #playsound('C:/Users/willk/OneDrive/Desktop/nyrr volunteer tracker/strong-minded-ringtone.mp3')
 
